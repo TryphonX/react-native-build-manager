@@ -1,0 +1,26 @@
+{
+	"name": "react-native-android-builder",
+	"type": "module",
+	"version": "0.1.0",
+	"description": "Increments versions and builds release apk / aab.",
+	"main": "./src/index.js",
+	"author": "Tryphon Ksydas tryphonxdev@gmail.com",
+	"scripts": {
+		"build": "tsc --build",
+		"clean": "tsc --build --clean",
+		"start": "tsc --build && node ./out/"
+	},
+	"devDependencies": {
+		"@types/node": "^8.0.14",
+		"@types/prompt-sync": "^4.1.1",
+		"@typescript-eslint/eslint-plugin": "^4.28.5",
+		"@typescript-eslint/parser": "^4.28.5",
+		"chalk": "^4.1.1",
+		"cli-select": "^1.1.2",
+		"eslint": "^7.31.0",
+		"typescript": "^3.2.2"
+	},
+	"dependencies": {
+		"prompt-sync": "^4.2.0"
+	}
+}
