@@ -32,7 +32,8 @@
 		"husky": "^7.0.1",
 		"prompt-sync": "^4.2.0",
 		"release-it": "^14.10.1",
-		"typescript": "^3.2.2"
+		"typescript": "^3.2.2",
+		"@release-it/conventional-changelog": "^3.0.1"
 	},
 	"commitlint": {
 		"extends": [
@@ -61,7 +62,5 @@
 			}
 		}
 	},
-	"dependencies": {
-		"@release-it/conventional-changelog": "^3.0.1"
-	}
+	"dependencies": {}
 }
