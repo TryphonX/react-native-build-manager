@@ -1,5 +1,6 @@
 import chalk from 'chalk';
 import { exec } from 'child_process';
+import { startAsync } from '../index.js';
 import { BuildTask, giveChoice, logReply, makeYesNoQuestion } from './common.js';
 import { error, warn } from './consolePlus.js';
 
@@ -14,6 +15,23 @@ enum versionIncrement {
 	Patch = 'Patch',
 	None = 'None',
 }
+
+export const checkForUncommited = (): void => {
+	try {
+		exec('git diff-index --quiet HEAD --').on('exit', (code) => {
+			if (code === 1) {
+				startAsync(true);
+			}
+			else {
+				startAsync(false);
+			}
+		});
+		
+	} catch (err) {
+		warn(`Failed to get git difference: ${err.message}`);
+		startAsync(false);
+	}
+};
 
 /**
  * Asks the user questions about what the new version should be and determines the new versionName.

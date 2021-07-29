@@ -1,4 +1,4 @@
 #! /usr/bin/env node
-import { runAsync } from './index.js';
+import { initAsync } from './index.js';
 
-runAsync();
+initAsync();

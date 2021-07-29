@@ -1,4 +1,4 @@
-import { buildApk, getNewVersionName, getNewVersionCode, getBuildTask, askToConfirm } from './modules/helper.js';
+import { buildApk, getNewVersionName, getNewVersionCode, getBuildTask, askToConfirm, checkForUncommited } from './modules/helper.js';
 import chalk from 'chalk';
 import { info, warn } from './modules/consolePlus.js';
 import { getAppJSonVersion, getBuildGradleVersion, getConfig } from './modules/reader.js';
@@ -7,11 +7,19 @@ import { logReply } from './modules/common.js';
 
 const { cyan, bold, yellow } = chalk;
 
-export const runAsync = async(): Promise<void> => {
+export const initAsync = async(): Promise<void> => {
 	console.log(cyan('=========================='));
 	console.log(bold.underline('React Native Build Manager'));
 	console.log(cyan.italic.underline('By TryphonX'));
 	console.log(cyan('=========================='), '\n');
+
+	checkForUncommited();
+};
+
+export const startAsync = async(hasUncommited: boolean): Promise<void> => {
+	if (hasUncommited) {
+		warn('You have uncommited changes in your repository. It is recommended you commit them before building.');
+	}
 
 	const config = getConfig();
 
