@@ -17,7 +17,7 @@
 		"build": "tsc --build",
 		"clean": "tsc --build --clean",
 		"start": "tsc --build && node ./out/",
-		"release": "release-it"
+		"release": "dotenv release-it --"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "^13.1.0",
