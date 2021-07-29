@@ -1,9 +1,9 @@
 import chalk from 'chalk';
 import { exec } from 'child_process';
 import { BuildTask, giveChoice, logReply, makeYesNoQuestion } from './common.js';
-import { warn } from './consolePlus.js';
+import { error, warn } from './consolePlus.js';
 
-const { greenBright } = chalk;
+const { greenBright, cyan, red } = chalk;
 
 /**
  * The options for the new version name question.
@@ -97,11 +97,27 @@ export const buildApk = (task: BuildTask): void => {
 
 	const buildProcess = exec(`${bundleCmd} && ${buildCmd}`);
 
+	let success = false;
+
 	buildProcess.stdout.on('data', (data) => {
 		console.log(data);
+		if (data.toString().match(/build successful/i)) {
+			success = true;
+		}
 	});
 
 	buildProcess.stderr.on('data', (data) => {
 		console.log(data);
+	});
+
+	buildProcess.stderr.on('error', (data) => error(data.message));
+
+	buildProcess.stdout.on('end', () => {
+		if (success) {
+			console.log(greenBright.bold('Build Successful\n'));
+		}
+		else {
+			console.log(red.bold('Build Failed\n'));
+		}
 	});
 };
