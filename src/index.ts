@@ -1,12 +1,14 @@
 import { buildApk, getAppJSonVersion, getBuildGradleVersion, getConfig, getNewVersion, getNewVersionCode, updateVersions } from './modules/helper.js';
 import chalk from 'chalk';
 import { info, warn } from './modules/consolePlus.js';
+import { env } from 'process';
 
 const { cyan, bold, gray } = chalk;
 
 export const runAsync = async(): Promise<void> => {
 	console.log(cyan('============================'));
 	console.log(bold.underline('React Native Android Builder'));
+	console.log(`v${env.npm_package_version}`);
 	console.log(cyan.italic.underline('By TryphonX'));
 	console.log(cyan('============================'), '\n');
 
