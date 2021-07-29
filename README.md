@@ -15,6 +15,8 @@ More specifically, it takes care of versioning, bundling and building the actual
 - [Installation](#installation)
 - [Use](#use)
 	- [Getting started](#getting-started)
+	- [Configuration](#configuration)
+	- [Steps](#steps)
 	- [Versioning](#versioning)
 
 # Installation
@@ -39,6 +41,32 @@ npx manage-build
 On the first run, a configuration file will be created in `./build-manager`. It currently only stores whether you are using it in an (ejected) expo project or not. This is used to update the `app.json` -in the case of an expo project- to ensure consistency.
 
 > **Output:** The APK will be found in `./android/app/build/outputs/apk/release`
+
+<br/>
+
+## Configuration
+As mentioned earlier, on the first run, you will be asked extra questions to create the right **_configuration_**. Currently, the configuration only requires to know whether you are using the command in an **ejected** (**_bare workflow_**) expo app or not.
+
+> **Note:** The configuration can be manually edited in case of mistake during the setup by editing the `./build-manager/config.json` file.
+
+<br/>
+
+## Steps
+![Preview of the script in action](https://i.imgur.com/UQknWPU.gif)  
+_Preview of the command's use_  
+_\(I was too lazy to set up an example project for it, but I've tested it on my own private project. Have to take my word for it, I guess_ 🤷‍♂️ _\)_
+
+1. You specify if you want to increment your version or not. If you chose to increment it, you have the choice of making your new version a **_major_**, **_minor_** or **_patch_** version. (more info @ [versioning](#versioning))
+2. You are asked if you want your **_versionCode_** (more info @ [versioning](#versioning)) incremented.
+3. The new versions are printed on the console.
+4. You are what kind of build you want:
+   - **Debug APK:** An _unsigned_ .apk that can only be used for debugging purposes. This .apk can **_not_** be uploaded to _Google Play Console_.
+   - **Release APK:** A _signed_ .apk that can be used for testing your release and be uploaded to _Google Play Console_.
+   - **Release AAB:** A _signed_ .aab whose only purpose is to be uploaded to _Google Play Console_.  
+   - **Release APK and AAB:** _Self-explanatory._
+5. You are asked to confirm your input (not shown above .gif).
+
+<br/>
 
 ## Versioning
 

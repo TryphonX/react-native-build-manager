@@ -3,7 +3,7 @@ import { exec } from 'child_process';
 import { BuildTask, giveChoice, logReply, makeYesNoQuestion } from './common.js';
 import { error, warn } from './consolePlus.js';
 
-const { greenBright, cyan, red } = chalk;
+const { greenBright, red } = chalk;
 
 /**
  * The options for the new version name question.
