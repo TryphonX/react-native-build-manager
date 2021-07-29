@@ -340,7 +340,7 @@ ASALocalRun/
 healthchecksdb
 
 # Results
-/android-builder
+/react-native-builder
 /desktop.ini
 /out
 /android

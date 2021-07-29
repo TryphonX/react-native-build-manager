@@ -7,8 +7,8 @@ import { error, warn } from './consolePlus.js';
 import consoleChoice from 'cli-select';
 import { exec } from 'child_process';
 
-const PACKAGE_DIR = `${cwd()}/android-builder`;
-const CONFIG_PATH = `${cwd()}/android-builder/config.json`;
+const PACKAGE_DIR = `${cwd()}/react-native-builder`;
+const CONFIG_PATH = `${cwd()}/react-native-builder/config.json`;
 
 const APP_JSON_PATH = `${cwd()}/app.json`;
 const BUILD_GRADLE_PATH = `${cwd()}/android/app/build.gradle`;
