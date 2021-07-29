@@ -65,6 +65,8 @@ export const getNewVersionCode = (_versionCode: string): string => {
 	}
 };
 
+export const askToConfirm = (): boolean => makeYesNoQuestion('Confirm?');
+
 export const getBuildTask = async(): Promise<BuildTask> => await giveChoice('Build:', BuildTask) as BuildTask;
 
 export const buildApk = (task: BuildTask): void => {

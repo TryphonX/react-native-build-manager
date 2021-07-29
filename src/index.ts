@@ -1,4 +1,4 @@
-import { buildApk, getNewVersionName, getNewVersionCode, getBuildTask } from './modules/helper.js';
+import { buildApk, getNewVersionName, getNewVersionCode, getBuildTask, askToConfirm } from './modules/helper.js';
 import chalk from 'chalk';
 import { info, warn } from './modules/consolePlus.js';
 import { getAppJSonVersion, getBuildGradleVersion, getConfig } from './modules/reader.js';
@@ -30,15 +30,21 @@ export const runAsync = async(): Promise<void> => {
 	info(`Version Name: ${yellow(currentVerName)} => ${cyan(newVersionName)}`);
 	info(`Version Code: ${yellow(currentVerCode)} => ${cyan(newVersionCode)}\n`);
 
-	// Time to change the versions in the files
-	updateVersions(newVersionName, newVersionCode, config.expo);
-
 	const task = await getBuildTask();
 
 	logReply(task);
 
 	console.log();
 
+	const confirmed = askToConfirm();
+
 	// time to actually build the new version
-	buildApk(task);
+	if (confirmed) {
+		// Time to change the versions in the files
+		updateVersions(newVersionName, newVersionCode, config.expo);
+		buildApk(task);
+	}
+	else {
+		console.log('Aborting...\n');
+	}
 };
