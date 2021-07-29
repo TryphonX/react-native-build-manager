@@ -1,13 +1,15 @@
 import chalk from 'chalk';
 
+const { yellow, red, blue } = chalk;
+
 export const warn = (msg: string): void => {
-	console.warn(`${chalk.bgYellow.bold(' WARN ')}  ${chalk.yellow(msg)}`);
+	console.warn(`${yellow.bold('warn')} ${msg}`);
 };
 
 export const error = (msg: string): void => {
-	console.error(`${chalk.bgRed.bold(' ERROR ')}  ${chalk.red(msg)}`);
+	console.error(`${red.bold('error')} ${msg}`);
 };
 
 export const info = (msg: string): void => {
-	console.info(`${chalk.bgCyan.bold(' i ')}  ${chalk.cyan(msg)}`);
+	console.info(`${blue.bold('i')} ${msg}`);
 };
