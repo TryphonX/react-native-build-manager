@@ -10,7 +10,7 @@
 	"author": "TryphonX tryphonxdev@gmail.com",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/TryphonX/react-native-builder"
+		"url": "https://github.com/TryphonX/react-native-build-manager"
 	},
 	"license": "MIT",
 	"scripts": {
