@@ -1,6 +1,6 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs';
 import { cwd } from 'process';
-import { Config } from './types';
+import { Config } from './types.js';
 import prompt from 'prompt-sync';
 import chalk from 'chalk';
 import { error, warn } from './consolePlus.js';

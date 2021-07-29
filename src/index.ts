@@ -1,6 +1,6 @@
-import { buildApk, getAppJSonVersion, getBuildGradleVersion, getConfig, getNewVersion, getNewVersionCode, updateVersions } from './helper.js';
+import { buildApk, getAppJSonVersion, getBuildGradleVersion, getConfig, getNewVersion, getNewVersionCode, updateVersions } from './modules/helper.js';
 import chalk from 'chalk';
-import { info, warn } from './consolePlus.js';
+import { info, warn } from './modules/consolePlus.js';
 import { env } from 'process';
 
 const { cyan, bold, gray } = chalk;
