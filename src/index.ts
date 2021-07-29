@@ -1,41 +1,42 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-import { spawn } from 'child_process';
-import { getAppJSonVersion, getBuildGradleVersion, getConfig, getNewVersion, getNewVersionCode, updateVersions } from './helper.js';
+import { buildApk, getAppJSonVersion, getBuildGradleVersion, getConfig, getNewVersion, getNewVersionCode, updateVersions } from './helper.js';
 import chalk from 'chalk';
 import { info, warn } from './consolePlus.js';
 import { env } from 'process';
 
+const { cyan, bold, gray } = chalk;
+
 const runAsync = async() => {
-	console.log(chalk.cyan('============================'));
-	console.log(chalk.bold.underline('React Native Android Builder'));
+	console.log(cyan('============================'));
+	console.log(bold.underline('React Native Android Builder'));
 	console.log(`v${env.npm_package_version}`);
-	console.log(chalk.cyan.italic.underline('By TryphonX'));
-	console.log(chalk.cyan('============================'));
+	console.log(cyan.italic.underline('By TryphonX'));
+	console.log(cyan('============================'), '\n');
 
 	const config = getConfig();
 
 	const appJsonVer = config.expo ? getAppJSonVersion() : '';
-	const { gradleVersion, versionCode } = getBuildGradleVersion();
+	const { gradleVersion: currentVerName, versionCode: currentVerCode } = getBuildGradleVersion();
 
-	const matchingVersions = config.expo ? appJsonVer === gradleVersion : true;
+	const matchingVersions = config.expo ? appJsonVer === currentVerName : true;
 
 	if (!matchingVersions) {
 		warn('Mismatched versions. Using the version in build.gradle...');
 	}
 
-	console.log();
-	info(`Current APK version: ${gradleVersion}`);
-	const newVersionName = await getNewVersion(gradleVersion);
+	console.log(gray(`Current version name: ${currentVerName}`));
+	console.log(gray(`Current version code: ${currentVerCode}`), '\n');
 
-	const newVersionCode = await getNewVersionCode(versionCode);
+	const newVersionName = await getNewVersion(currentVerName);
+	const newVersionCode = await getNewVersionCode(currentVerCode);
 
-	console.log();
-	info('New version:');
-	info(`name: ${newVersionName}`);
-	info(`code: ${newVersionCode}`);
+	info(`Version Name: ${newVersionName}`);
+	info(`Version Code: ${newVersionCode}`);
 
 	// Time to change the versions in the files
 	updateVersions(newVersionName, newVersionCode, config.expo);
+
+	// time to actually build the new version
+	buildApk();
 };
 
 runAsync();

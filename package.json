@@ -14,12 +14,13 @@
 		"build": "tsc --build",
 		"clean": "tsc --build --clean",
 		"start": "tsc --build && node ./out/",
-		"release": "release-it"
+		"release": "release-it",
+		"generate-release-bundle-android": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle",
+		"build-android": "npm run generate-release-bundle-android && cd ./android/ && gradlew assembleRelease"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "^13.1.0",
 		"@commitlint/config-conventional": "^13.1.0",
-		"@types/node": "^8.0.14",
 		"@types/prompt-sync": "^4.1.1",
 		"@typescript-eslint/eslint-plugin": "^4.28.5",
 		"@typescript-eslint/parser": "^4.28.5",
@@ -31,7 +32,6 @@
 		"release-it": "^14.10.1",
 		"typescript": "^3.2.2"
 	},
-	"dependencies": {},
 	"commitlint": {
 		"extends": [
 			"@commitlint/config-conventional"
