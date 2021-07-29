@@ -131,7 +131,7 @@ export const getNewVersion = async(version: string): Promise<string> => {
 
 	console.log(`${green(' ? ')}  The new APK version should increment:`);
 
-	const { value } = await  consoleChoice({
+	const { value } = await consoleChoice({
 		values: [versionIncrement.Major, versionIncrement.Minor, versionIncrement.Patch, versionIncrement.None],
 		valueRenderer: (value, selected) => {
 			if (selected) {

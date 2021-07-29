@@ -27,7 +27,7 @@ const runAsync = async() => {
 	console.log(gray(`Current version code: ${currentVerCode}`), '\n');
 
 	const newVersionName = await getNewVersion(currentVerName);
-	const newVersionCode = await getNewVersionCode(currentVerCode);
+	const newVersionCode = getNewVersionCode(currentVerCode);
 
 	info(`Version Name: ${newVersionName}`);
 	info(`Version Code: ${newVersionCode}`);
