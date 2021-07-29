@@ -3,7 +3,10 @@
 	"type": "module",
 	"version": "0.1.0",
 	"description": "Increments versions and builds release apk / aab.",
-	"main": "./src/index.js",
+	"main": "./out/index.js",
+	"bin": {
+		"android-builder": "./out/cli.js"
+	},
 	"author": "Tryphon Ksydas tryphonxdev@gmail.com",
 	"repository": {
 		"type": "git",

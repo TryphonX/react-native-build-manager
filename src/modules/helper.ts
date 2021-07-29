@@ -13,7 +13,7 @@ const CONFIG_PATH = `${cwd()}/android-builder/config.json`;
 const APP_JSON_PATH = `${cwd()}/app.json`;
 const BUILD_GRADLE_PATH = `${cwd()}/android/app/build.gradle`;
 
-const { green, underline, gray } = chalk;
+const { underline, gray, greenBright } = chalk;
 
 enum versionIncrement {
 	Major = 'Major',
@@ -129,10 +129,12 @@ export const getNewVersion = async(version: string): Promise<string> => {
 
 	let [major, minor, patch] = [~~majorStr, ~~minorStr, ~~patchStr];
 
-	console.log(`${green(' ? ')}  The new APK version should increment:`);
+	console.log(`${greenBright('>')} The new APK version should increment:`);
 
 	const { value } = await consoleChoice({
 		values: [versionIncrement.Major, versionIncrement.Minor, versionIncrement.Patch, versionIncrement.None],
+		selected: greenBright('⬤'),
+		unselected: '◯',
 		valueRenderer: (value, selected) => {
 			if (selected) {
 				return underline(value);
@@ -178,20 +180,20 @@ export const getNewVersionCode = (_versionCode: string): string => {
 	}
 };
 
-const ask = (question: string) => prompt()(`${green(' ? ')}  ${question} `);
+const ask = (question: string) => prompt()(`${greenBright('>')} ${question} `);
 
 const logReply = (reply: string) => {
-	console.log(gray(` >   ${reply}`));
+	console.log(gray(`> ${reply}`));
 };
 
 export const buildApk = (): void => {
 	const build = exec('react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle & cd ./android/ & gradlew assembleRelease');
 
 	build.stdout.on('data', (data) => {
-		console.log(gray(`stdout: ${data}`));
+		console.log(data);
 	});
 
 	build.stderr.on('data', (data) => {
-		error(`stderr: ${data}`);
+		warn(data.toString());
 	});
 };

@@ -5,7 +5,7 @@ import { env } from 'process';
 
 const { cyan, bold, gray } = chalk;
 
-const runAsync = async() => {
+export const runAsync = async(): Promise<void> => {
 	console.log(cyan('============================'));
 	console.log(bold.underline('React Native Android Builder'));
 	console.log(`v${env.npm_package_version}`);
@@ -38,5 +38,3 @@ const runAsync = async() => {
 	// time to actually build the new version
 	buildApk();
 };
-
-runAsync();
