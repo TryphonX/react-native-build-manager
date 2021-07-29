@@ -1,7 +1,7 @@
 {
 	"name": "react-native-build-manager",
 	"type": "module",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"description": "Increments versions and builds release apk / aab.",
 	"main": "./out/index.js",
 	"bin": {
