@@ -1,6 +1,7 @@
 import chalk from 'chalk';
 import { exec } from 'child_process';
-import { giveChoice, logReply, makeYesNoQuestion } from './common.js';
+import { BuildTask, giveChoice, logReply, makeYesNoQuestion } from './common.js';
+import { warn } from './consolePlus.js';
 
 const { greenBright } = chalk;
 
@@ -26,9 +27,7 @@ export const getNewVersionName = async(version: string): Promise<string> => {
 	// getting a new tuple by shifting the previous string tuple to numbers
 	let [major, minor, patch] = [~~majorStr, ~~minorStr, ~~patchStr];
 
-	console.log(`${greenBright('?')} The new APK version should increment:`);
-
-	const choice = await giveChoice(versionIncrement);
+	const choice = await giveChoice('The new APK version should increment:', versionIncrement);
 
 	switch (choice) {
 	case versionIncrement.Major:
@@ -66,14 +65,43 @@ export const getNewVersionCode = (_versionCode: string): string => {
 	}
 };
 
-export const buildApk = (): void => {
-	const build = exec('react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle & cd ./android/ & gradlew assembleRelease');
+export const getBuildTask = async(): Promise<BuildTask> => await giveChoice('Build:', BuildTask) as BuildTask;
 
-	build.stdout.on('data', (data) => {
+export const buildApk = (task: BuildTask): void => {
+
+	const bundleCmd = 'react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle';
+
+	let buildCmd: string;
+
+	switch (task) {
+	case BuildTask.Debug:
+		buildCmd = 'cd ./android/ && gradlew assembleDebug';
+		break;
+	
+	case BuildTask.ReleaseApk:
+		buildCmd = 'cd ./android/ && gradlew assembleRelease';
+		break;
+
+	case BuildTask.ReleaseBundle:
+		buildCmd = 'cd ./android/ && gradlew bundleRelease';
+		break;
+
+	case BuildTask.ReleaseFull:
+		buildCmd = 'cd ./android/ && gradlew assembleRelease && gradlew bundleRelease';
+		break;
+
+	default:
+		warn('Unexpected error @ helper');
+		break;
+	}
+
+	const buildProcess = exec(`${bundleCmd} && ${buildCmd}`);
+
+	buildProcess.stdout.on('data', (data) => {
 		console.log(data);
 	});
 
-	build.stderr.on('data', (data) => {
+	buildProcess.stderr.on('data', (data) => {
 		console.log(data);
 	});
 };

@@ -5,6 +5,13 @@ import { cwd } from 'process';
 
 const { cyan, greenBright, gray, underline } = chalk;
 
+export enum BuildTask {
+	Debug = 'Debug APK',
+	ReleaseApk = 'Release APK',
+	ReleaseBundle = 'Release AAB',
+	ReleaseFull = 'Release APK & AAB',
+}
+
 export const APP_JSON_PATH = `${cwd()}/app.json`;
 export const BUILD_GRADLE_PATH = `${cwd()}/android/app/build.gradle`;
 
@@ -29,10 +36,12 @@ export const makeYesNoQuestion = (question: string): boolean => {
 	}
 };
 
-
 interface ValuesObject<T> { [s: string]: T }
 
-export const giveChoice = async(values: ValuesObject<string>): Promise<string> => {
+export const giveChoice = async(question: string, values: ValuesObject<string>): Promise<string> => {
+
+	console.log(`${greenBright('?')} ${question}`);
+
 	const { value } = await cliSelect({
 		values: values,
 		selected: greenBright('⬤'),
