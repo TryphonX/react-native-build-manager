@@ -22,11 +22,11 @@ More specifically, it takes care of versioning, bundling and building the actual
 In order to install the package, simply use:
 
 ```powershell
-npm install react-native-builder
+npm install react-native-build-manager
 ```
 or
 ```powershell
-yarn add react-native-builder
+yarn add react-native-build-manager
 ```
 
 # Use
@@ -34,9 +34,9 @@ yarn add react-native-builder
 ## Getting started
 The process of using the command is pretty straightforward.
 ```powershell
-npx react-native-builder
+npx manage-build
 ```
-On the first run, a configuration file will be created in `./react-native-builder`. It currently only stores whether you are using it in an (ejected) expo project or not. This is used to update the `app.json` -in the case of an expo project- to ensure consistency.
+On the first run, a configuration file will be created in `./build-manager`. It currently only stores whether you are using it in an (ejected) expo project or not. This is used to update the `app.json` -in the case of an expo project- to ensure consistency.
 
 > **Output:** The APK will be found in `./android/app/build/outputs/apk/release`
 

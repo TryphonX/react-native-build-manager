@@ -340,8 +340,9 @@ ASALocalRun/
 healthchecksdb
 
 # Results
-/react-native-builder
+/build-manager
 /desktop.ini
 /out
 /android
 .env
+/cache

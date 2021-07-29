@@ -17,7 +17,7 @@
 		"build": "tsc --build",
 		"clean": "tsc --build --clean",
 		"start": "tsc --build && node ./out/",
-		"release": "dotenv release-it --"
+		"release": "yarn run build && dotenv release-it --"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "^13.1.0",
