@@ -1,6 +1,6 @@
 # Introduction
 
-This package delivers a CLI command `react-native-builder` which handles the whole building process for you. Currently, it only works for release builds (signed).
+This package delivers a CLI command `manage-build` which handles the whole building process for you. Currently, it only works for release builds (signed).
 
 More specifically, it takes care of versioning, bundling and building the actual release APK.
 
