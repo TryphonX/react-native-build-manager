@@ -344,3 +344,4 @@ healthchecksdb
 /desktop.ini
 /out
 /android
+.env
