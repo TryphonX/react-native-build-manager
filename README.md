@@ -1,12 +1,11 @@
+[![npm](https://img.shields.io/npm/v/react-native-build-manager?logo=npm)](https://www.npmjs.com/package/react-native-build-manager)
+[![GitHub](https://img.shields.io/github/license/tryphonx/react-native-build-manager?color=red&logo=github)](./LICENSE.md)
+
 # Introduction
 
-This package delivers a CLI command `manage-build` which handles the whole building process for you. Currently, it only works for release builds (signed).
+This package delivers a CLI command `manage-build` which handles the whole building process for you. More specifically, it takes care of versioning, bundling and building the APK or AAB.
 
-More specifically, it takes care of versioning, bundling and building the actual release APK.
-
-> Android only (for now)
-
-> SoonTM: debugBuilds, release bundles (aab)
+> 🤖 Android only (for now)
 
 # Contents
 
