@@ -16,10 +16,7 @@ export const initAsync = async(): Promise<void> => {
 	checkForUncommited();
 };
 
-export const startAsync = async(hasUncommited: boolean): Promise<void> => {
-	if (hasUncommited) {
-		warn('You have uncommited changes in your repository. It is recommended you commit them before building.');
-	}
+export const startAsync = async(): Promise<void> => {
 
 	const config = getConfig();
 

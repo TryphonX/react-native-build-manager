@@ -3,7 +3,7 @@ import prompt from 'prompt-sync';
 import cliSelect from 'cli-select';
 import { cwd } from 'process';
 
-const { cyan, greenBright, gray, underline } = chalk;
+const { cyan, greenBright, gray, underline, yellow } = chalk;
 
 export enum BuildTask {
 	Debug = 'Debug APK',
@@ -16,7 +16,7 @@ export const APP_JSON_PATH = `${cwd()}/app.json`;
 export const BUILD_GRADLE_PATH = `${cwd()}/android/app/build.gradle`;
 export const PACKAGE_JSON_PATH = `${cwd()}/package.json`;
 
-export const ask = (question: string): string => prompt()(`${greenBright('?')} ${question} `);
+export const ask = (question: string): string => prompt()(`${greenBright.bold('?')} ${question} `);
 
 export const logReply = (reply: string): void => console.log(cyan(`> ${reply}`));
 
@@ -41,12 +41,12 @@ interface ValuesObject<T> { [s: string]: T }
 
 export const giveChoice = async(question: string, values: ValuesObject<string>): Promise<string> => {
 
-	console.log(`${greenBright('?')} ${question}`);
+	console.log(`${greenBright.bold('?')} ${question}`);
 
 	const { value } = await cliSelect({
 		values: values,
-		selected: greenBright('⬤'),
-		unselected: '◯',
+		selected: greenBright.bold('⬤'),
+		unselected: yellow.bold('◯'),
 		valueRenderer: (value, selected) => {
 			if (selected) {
 				return underline(value);
