@@ -16,29 +16,19 @@ enum versionIncrement {
 	None = 'None',
 }
 
-const onNotCleanRepo = () => {
-	const wantsToContinue = makeYesNoQuestion('Do you wish to continue at your own risk?');
-				
-	if (wantsToContinue) startAsync();
-	else process.exit();
-};
-
 export const checkForUncommited = (): void => {
 	try {
 		exec('git diff-index --quiet HEAD --').on('exit', (code) => {
-			if (code === 1) {
-				warn('Your repository is not clean! It is recommended you commit all uncommited changes before proceeding.');
-				
-				onNotCleanRepo();
-			}
-			else startAsync();
+			if (code === 1) warn('Your repository is not clean! It is recommended you commit all uncommited changes before proceeding.');
+
+			startAsync();
 		});
 		
 	} catch (err) {
 		warn(`Failed to get git difference: ${err.message}`);
 		warn('It is recommended you commit all uncommited changes before proceeding.');
 		
-		onNotCleanRepo();
+		startAsync();
 	}
 };
 

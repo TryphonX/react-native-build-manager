@@ -1,11 +1,10 @@
 import { Config } from './types.js';
 import { APP_JSON_PATH, BUILD_GRADLE_PATH, makeYesNoQuestion, PACKAGE_JSON_PATH } from './common.js';
-import { error, warn } from './consolePlus.js';
-import { existsSync, mkdirSync, writeFileSync, readFileSync } from 'fs';
+import { error, info } from './consolePlus.js';
+import { existsSync, writeFileSync, readFileSync } from 'fs';
 import { cwd } from 'process';
 
-const PACKAGE_DIR = `${cwd()}/build-manager`;
-const CONFIG_PATH = `${PACKAGE_DIR}/config.json`;
+const CONFIG_PATH = `${cwd()}/build-manager.json`;
 
 /**
  * Looks for the config file. If there is none, one will be created for the user.
@@ -14,17 +13,13 @@ const CONFIG_PATH = `${PACKAGE_DIR}/config.json`;
 export const getConfig = (): Config => {
 	if (!existsSync(CONFIG_PATH)) {
 
-		warn('No previous configuration found. Creating a new one...');
+		info('No previous configuration found. Creating a new one...');
 	
 		const usesExpo = makeYesNoQuestion('Do you use expo in your project?');
 
 		const config: Config = {
 			expo: usesExpo,
 		};
-	
-		if (!existsSync(PACKAGE_DIR)) {
-			mkdirSync(PACKAGE_DIR);
-		}
 
 		writeFileSync(CONFIG_PATH, JSON.stringify(config, null, '\t'));
 
