@@ -11,6 +11,16 @@ const CONFIG_PATH = `${cwd()}/build-manager.json`;
  * @returns The project configuration.
  */
 export const getConfig = (): Config => {
+
+	const packageJson = JSON.parse(readFileSync(PACKAGE_JSON_PATH, { encoding: 'utf8' }));
+
+	const packageConfig = packageJson['rn-build-manager'];
+	
+	// if there is a configuration in package.json
+	// get that over separate file
+	if (packageConfig) return packageConfig as Config;
+
+	// no package.json configuration 
 	if (!existsSync(CONFIG_PATH)) {
 
 		info('No previous configuration found. Creating a new one...');
