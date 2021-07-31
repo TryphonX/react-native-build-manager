@@ -14,6 +14,7 @@ export enum BuildTask {
 
 export const APP_JSON_PATH = `${cwd()}/app.json`;
 export const BUILD_GRADLE_PATH = `${cwd()}/android/app/build.gradle`;
+export const PACKAGE_JSON_PATH = `${cwd()}/package.json`;
 
 export const ask = (question: string): string => prompt()(`${greenBright('?')} ${question} `);
 

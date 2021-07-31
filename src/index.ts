@@ -1,7 +1,7 @@
 import { buildApk, getNewVersionName, getNewVersionCode, getBuildTask, askToConfirm, checkForUncommited } from './modules/helper.js';
 import chalk from 'chalk';
 import { info, warn } from './modules/consolePlus.js';
-import { getAppJSonVersion, getBuildGradleVersion, getConfig } from './modules/reader.js';
+import { getAppJSonVersion, getBuildGradleVersion, getConfig, getPackageVersion } from './modules/reader.js';
 import { updateVersions } from './modules/writer.js';
 import { logReply } from './modules/common.js';
 
@@ -25,8 +25,9 @@ export const startAsync = async(hasUncommited: boolean): Promise<void> => {
 
 	const appJsonVer = config.expo ? getAppJSonVersion() : '';
 	const { versionName: currentVerName, versionCode: currentVerCode } = getBuildGradleVersion();
+	const packageVersionName = getPackageVersion();
 
-	const matchingVersions = config.expo ? appJsonVer === currentVerName : true;
+	const matchingVersions = config.expo ? appJsonVer === currentVerName && currentVerName === packageVersionName : currentVerName === packageVersionName;
 
 	if (!matchingVersions) {
 		warn('Mismatched versions. Using the version in build.gradle...');

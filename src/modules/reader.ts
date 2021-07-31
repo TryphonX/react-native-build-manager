@@ -1,5 +1,5 @@
 import { Config } from './types.js';
-import { APP_JSON_PATH, BUILD_GRADLE_PATH, makeYesNoQuestion } from './common.js';
+import { APP_JSON_PATH, BUILD_GRADLE_PATH, makeYesNoQuestion, PACKAGE_JSON_PATH } from './common.js';
 import { error, warn } from './consolePlus.js';
 import { existsSync, mkdirSync, writeFileSync, readFileSync } from 'fs';
 import { cwd } from 'process';
@@ -74,5 +74,17 @@ export const getBuildGradleVersion = (): { versionName: string, versionCode: str
 			versionName,
 			versionCode,
 		};
+	}
+};
+
+export const getPackageVersion = (): string => {
+	if (!existsSync(PACKAGE_JSON_PATH)) {
+		error('No package.json file found! Aborting...');
+		process.exit();
+	}
+	else {
+		const { version } = JSON.parse(readFileSync(PACKAGE_JSON_PATH, { encoding: 'utf8' })) as { version: string };
+
+		return version;
 	}
 };
