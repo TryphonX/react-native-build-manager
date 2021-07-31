@@ -17,7 +17,8 @@
 		"build": "tsc --build",
 		"clean": "tsc --build --clean",
 		"start": "tsc --build && node ./out/cli.js",
-		"release": "yarn run build && dotenv release-it --"
+		"release": "yarn run build && dotenv release-it --",
+		"changelog": "auto-changelog --handlebars-setup ./changelog-config/setup.cjs && auto-changelog --handlebars-setup ./changelog-config/setup.cjs -o ./doc/RELEASE_NOTES.md -t ./changelog-config/release-notes.hbs"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "^13.1.0",
