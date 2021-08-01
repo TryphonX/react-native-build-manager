@@ -7,6 +7,8 @@ import { startManageBuildAsync } from '../cli/manage-build.js';
 
 const { cyan, greenBright, gray, underline, yellow, bold } = chalk;
 
+export const getArgvNoBin = (): string[] => process.argv.slice(2);
+
 export const initAsync = async(checkGit: boolean, callback = startManageBuildAsync): Promise<void> => {
 	console.log(cyan('=========================='));
 	console.log(bold('React Native Build Manager'));
