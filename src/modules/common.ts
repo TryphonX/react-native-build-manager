@@ -9,8 +9,8 @@ const { cyan, greenBright, gray, underline, yellow, bold } = chalk;
 
 export const initAsync = async(checkGit: boolean, callback = startManageBuildAsync): Promise<void> => {
 	console.log(cyan('=========================='));
-	console.log(bold.underline('React Native Build Manager'));
-	console.log(cyan.italic.underline('By TryphonX'));
+	console.log(bold('React Native Build Manager'));
+	console.log(cyan.italic('By TryphonX'));
 	console.log(cyan('==========================', '\n'));
 
 	//console.log('Thank you for using my package!', '\n');
