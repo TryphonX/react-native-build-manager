@@ -22,6 +22,11 @@ const parser = yargs(getArgvNoBin()).options({
 		choices: getOutputChoices(),
 		desc: 'Choose output type',
 	},
+	['same-version']: {
+		type: 'boolean',
+		desc: 'Do not increment the version',
+		default: false,
+	},
 });
 
 const { red, cyan, yellow } = chalk;
@@ -55,9 +60,29 @@ const getTask = async(output?: OutputFlag) => {
 	}
 };
 
+const getVersion = async(verName: string, verCode: string, sameVersion?: boolean) => {
+	if (sameVersion) {
+		return {
+			versionName: verName,
+			versionCode: verCode,
+		};
+	}
+	else {
+		const newVersionName = await getNewVersionName(verName);
+		const newVersionCode = getNewVersionCode(verCode);
+
+		return {
+			versionName: newVersionName,
+			versionCode: newVersionCode,
+		};
+	}
+};
+
 export const startManageBuildAsync = async(): Promise<void> => {
 
 	const args = await parser.argv;
+
+	console.log(args['same-version']);
 
 	const config = getConfig();
 
@@ -71,8 +96,7 @@ export const startManageBuildAsync = async(): Promise<void> => {
 		warn('Mismatched versions. Using the version in build.gradle...');
 	}
 
-	const newVersionName = await getNewVersionName(currentVerName);
-	const newVersionCode = getNewVersionCode(currentVerCode);
+	const { versionName: newVersionName, versionCode: newVersionCode } = await getVersion(currentVerName, currentVerCode, args['same-version']);
 
 	info(`Version Name: ${yellow(currentVerName)} => ${cyan(newVersionName)}`);
 	info(`Version Code: ${yellow(currentVerCode)} => ${cyan(newVersionCode)}\n`);
