@@ -1,6 +1,5 @@
 import chalk from 'chalk';
 import { exec } from 'child_process';
-import { startManageBuildAsync } from '../cli/manage-build.js';
 import { BuildTask, giveChoice, logReply, makeYesNoQuestion, START_PHRASES } from './common.js';
 import { error, warn } from './consolePlus.js';
 
@@ -22,19 +21,19 @@ enum versionIncrement {
  */
 export const getRandomPhrase = (): string => `🤯 ${START_PHRASES[Math.floor(Math.random()*START_PHRASES.length)]} \n`;
 
-export const checkForUncommited = (): void => {
+export const checkForUncommited = (callback: () => Promise<void>): void => {
 	try {
 		exec('git diff-index --quiet HEAD --').on('exit', (code) => {
 			if (code === 1) warn('Your repository is not clean! It is recommended you commit all uncommited changes before proceeding.');
 
-			startManageBuildAsync();
+			callback();
 		});
 		
 	} catch (err) {
 		warn(`Failed to get git difference: ${err.message}`);
 		warn('It is recommended you commit all uncommited changes before proceeding.');
 		
-		startManageBuildAsync();
+		callback();
 	}
 };
 

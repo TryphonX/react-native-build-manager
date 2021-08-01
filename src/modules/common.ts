@@ -3,10 +3,11 @@ import prompt from 'prompt-sync';
 import cliSelect from 'cli-select';
 import { cwd } from 'process';
 import { checkForUncommited, getRandomPhrase } from './helper';
+import { startManageBuildAsync } from '../cli/manage-build';
 
 const { cyan, greenBright, gray, underline, yellow, bold } = chalk;
 
-export const initAsync = async(checkGit: boolean): Promise<void> => {
+export const initAsync = async(checkGit: boolean, callback = startManageBuildAsync): Promise<void> => {
 	console.log(cyan('=========================='));
 	console.log(bold.underline('React Native Build Manager'));
 	console.log(cyan.italic.underline('By TryphonX'));
@@ -16,7 +17,7 @@ export const initAsync = async(checkGit: boolean): Promise<void> => {
 
 	console.log(getRandomPhrase());
 
-	if (checkGit) checkForUncommited();
+	if (checkGit) checkForUncommited(callback ?? startManageBuildAsync);
 };
 
 /**
