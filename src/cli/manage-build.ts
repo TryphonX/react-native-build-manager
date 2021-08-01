@@ -8,10 +8,10 @@ import { updateVersions } from '../modules/writer.js';
 import yargs from 'yargs';
 
 enum OutputFlag {
-	Debug = 'debug',
-	ReleaseApk = 'release-apk',
-	ReleaseAab = 'release-aab',
-	ReleaseFull = 'release-full',
+	Debug = 'd',
+	ReleaseApk = 'r-apk',
+	ReleaseAab = 'r-aab',
+	ReleaseFull = 'r-full',
 }
 
 const getOutputChoices = () => Object.values(OutputFlag).filter((val) => val.toLowerCase() === val);
