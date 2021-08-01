@@ -7,6 +7,10 @@ import { startManageBuildAsync } from '../cli/manage-build.js';
 
 const { cyan, greenBright, gray, underline, yellow, bold } = chalk;
 
+/**
+ * Wrapper process.argv.slice(2).
+ * @returns The cli args.
+ */
 export const getArgvNoBin = (): string[] => process.argv.slice(2);
 
 export const initAsync = async(checkGit: boolean, callback = startManageBuildAsync): Promise<void> => {
@@ -42,6 +46,9 @@ export const START_PHRASES = [
 	'This is idea really backfired, didn\'t it?',
 ];
 
+/**
+ * The names of the tasks to be executed.
+ */
 export enum BuildTask {
 	Debug = 'Debug APK',
 	ReleaseApk = 'Release APK',
@@ -53,10 +60,25 @@ export const APP_JSON_PATH = `${cwd()}/app.json`;
 export const BUILD_GRADLE_PATH = `${cwd()}/android/app/build.gradle`;
 export const PACKAGE_JSON_PATH = `${cwd()}/package.json`;
 
+/**
+ * Prompts the user to answer a question.
+ * @param question The question to show to the user.
+ * @returns The answer to the question.
+ */
 export const ask = (question: string): string => prompt()(`${greenBright.bold('?')} ${question} `);
 
+/**
+ * Logs the reply of a question.
+ * @param reply The reply to log.
+ * @returns 
+ */
 export const logReply = (reply: string): void => console.log(cyan(`> ${reply}`));
 
+/**
+ * Prompt the user to answer a yes/no question
+ * @param question The question to show to the user.
+ * @returns Whether the user answer yes or not.
+ */
 export const makeYesNoQuestion = (question: string): boolean => {
 
 	const answer = ask(`${question} ${gray('(y/n)')}`);
@@ -76,6 +98,12 @@ export const makeYesNoQuestion = (question: string): boolean => {
 
 interface ValuesObject<T> { [s: string]: T }
 
+/**
+ * Prompts the user to make a choice.
+ * @param question The question to show to the user.
+ * @param values The choices to show to the user.
+ * @returns The user's choice.
+ */
 export const giveChoice = async(question: string, values: ValuesObject<string>): Promise<string> => {
 
 	console.log(`${greenBright.bold('?')} ${question}`);
@@ -85,9 +113,7 @@ export const giveChoice = async(question: string, values: ValuesObject<string>):
 		selected: greenBright.bold('⬤'),
 		unselected: yellow.bold('◯'),
 		valueRenderer: (value, selected) => {
-			if (selected) {
-				return underline(value);
-			}
+			if (selected) underline(value);
 	
 			return value;
 		},

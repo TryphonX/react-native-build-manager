@@ -82,6 +82,10 @@ export const getBuildGradleVersion = (): { versionName: string, versionCode: str
 	}
 };
 
+/**
+ * Gets the version from the package.json of the project.
+ * @returns The version from the package.json file of the project.
+ */
 export const getPackageVersion = (): string => {
 	if (!existsSync(PACKAGE_JSON_PATH)) {
 		error('No package.json file found! Aborting...');

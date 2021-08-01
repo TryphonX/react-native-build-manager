@@ -78,6 +78,9 @@ const getVersion = async(verName: string, verCode: string, sameVersion?: boolean
 	}
 };
 
+/**
+ * Starts the main process of the **_manage-build_** CLI command.
+ */
 export const startManageBuildAsync = async(): Promise<void> => {
 
 	const args = await parser.argv;

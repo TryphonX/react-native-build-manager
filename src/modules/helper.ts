@@ -21,6 +21,10 @@ enum versionIncrement {
  */
 export const getRandomPhrase = (): string => `🤯 ${START_PHRASES[Math.floor(Math.random()*START_PHRASES.length)]} \n`;
 
+/**
+ * Checks for uncommited changes.
+ * @param callback The function to be called after checking for commit changes
+ */
 export const checkForUncommited = (callback: () => Promise<void>): void => {
 	try {
 		exec('git diff-index --quiet HEAD --').on('exit', (code) => {
