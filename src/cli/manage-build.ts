@@ -9,14 +9,10 @@ import { updateVersions } from '../modules/writer.js';
 const { red, cyan, yellow } = chalk;
 
 process.on('uncaughtException', () => {
-	
-	//error(err.message);
 
 	console.log(`${red.bold('!')} Aborted!\n`);
 	process.exit();
 });
-
-
 
 export const startManageBuildAsync = async(): Promise<void> => {
 

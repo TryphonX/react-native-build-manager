@@ -3590,7 +3590,7 @@ yargs-parser@^18.1.3:
 
 yargs@^17.0.0:
   version "17.0.1"
-  resolved "https://registry.npmjs.org/yargs/-/yargs-17.0.1.tgz"
+  resolved "https://registry.yarnpkg.com/yargs/-/yargs-17.0.1.tgz#6a1ced4ed5ee0b388010ba9fd67af83b9362e0bb"
   integrity sha512-xBBulfCc8Y6gLFcrPvtqKz9hz8SO0l1Ni8GgDekvBX2ro0HRQImDGnikfc33cgzcYUSncapnNcZDjVFIH3f6KQ==
   dependencies:
     cliui "^7.0.2"
