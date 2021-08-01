@@ -5,7 +5,7 @@
 	"description": "This package delivers a CLI command `manage-build` which handles the whole building process for you. More specifically, it takes care of versioning, bundling and building the APK or AAB.",
 	"main": "./out/cli.js",
 	"bin": {
-		"manage-build": "./out/cli.js"
+		"manage-build": "./out/cli/manage-build.js"
 	},
 	"author": "TryphonX tryphonxdev@gmail.com",
 	"repository": {
@@ -16,7 +16,7 @@
 	"scripts": {
 		"build": "tsc --build",
 		"clean": "tsc --build --clean",
-		"start": "tsc --build && node ./out/cli.js",
+		"start": "tsc --build && node ./out/cli/manage-build.js",
 		"release": "yarn run build && dotenv release-it --",
 		"changelog": "auto-changelog --handlebars-setup ./changelog-config/setup.cjs && auto-changelog --handlebars-setup ./changelog-config/setup.cjs -o ./doc/RELEASE_NOTES.md -t ./changelog-config/release-notes.hbs"
 	},

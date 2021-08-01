@@ -1,7 +1,7 @@
 import chalk from 'chalk';
 import { exec } from 'child_process';
-import { startAsync } from '../index.js';
-import { BuildTask, giveChoice, logReply, makeYesNoQuestion } from './common.js';
+import { startManageBuildAsync } from '../cli/manage-build.js';
+import { BuildTask, giveChoice, logReply, makeYesNoQuestion, START_PHRASES } from './common.js';
 import { error, warn } from './consolePlus.js';
 
 const { greenBright, red } = chalk;
@@ -16,19 +16,25 @@ enum versionIncrement {
 	None = 'None',
 }
 
+/**
+ * Gets the random phrase
+ * @returns a random phrase with a random emoji.
+ */
+export const getRandomPhrase = (): string => `🤯 ${START_PHRASES[Math.floor(Math.random()*START_PHRASES.length)]} \n`;
+
 export const checkForUncommited = (): void => {
 	try {
 		exec('git diff-index --quiet HEAD --').on('exit', (code) => {
 			if (code === 1) warn('Your repository is not clean! It is recommended you commit all uncommited changes before proceeding.');
 
-			startAsync();
+			startManageBuildAsync();
 		});
 		
 	} catch (err) {
 		warn(`Failed to get git difference: ${err.message}`);
 		warn('It is recommended you commit all uncommited changes before proceeding.');
 		
-		startAsync();
+		startManageBuildAsync();
 	}
 };
 

@@ -1,22 +1,24 @@
-import { buildApk, getNewVersionName, getNewVersionCode, getBuildTask, askToConfirm, checkForUncommited } from './modules/helper.js';
+#! /usr/bin/env node
 import chalk from 'chalk';
-import { info, warn } from './modules/consolePlus.js';
-import { getAppJSonVersion, getBuildGradleVersion, getConfig, getPackageVersion } from './modules/reader.js';
-import { updateVersions } from './modules/writer.js';
-import { logReply } from './modules/common.js';
+import { initAsync, logReply } from '../modules/common.js';
+import { info, warn } from '../modules/consolePlus.js';
+import { askToConfirm, buildApk, getBuildTask, getNewVersionCode, getNewVersionName } from '../modules/helper.js';
+import { getAppJSonVersion, getBuildGradleVersion, getConfig, getPackageVersion } from '../modules/reader.js';
+import { updateVersions } from '../modules/writer.js';
 
-const { cyan, bold, yellow } = chalk;
+const { red, cyan, yellow } = chalk;
 
-export const initAsync = async(): Promise<void> => {
-	console.log(cyan('=========================='));
-	console.log(bold.underline('React Native Build Manager'));
-	console.log(cyan.italic.underline('By TryphonX'));
-	console.log(cyan('=========================='), '\n');
+process.on('uncaughtException', () => {
+	
+	//error(err.message);
 
-	checkForUncommited();
-};
+	console.log(`${red.bold('!')} Aborted!\n`);
+	process.exit();
+});
 
-export const startAsync = async(): Promise<void> => {
+
+
+export const startManageBuildAsync = async(): Promise<void> => {
 
 	const config = getConfig();
 
@@ -54,3 +56,5 @@ export const startAsync = async(): Promise<void> => {
 		console.log('Aborting...\n');
 	}
 };
+
+initAsync(true);
