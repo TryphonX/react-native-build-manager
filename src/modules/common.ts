@@ -2,8 +2,8 @@ import chalk from 'chalk';
 import prompt from 'prompt-sync';
 import cliSelect from 'cli-select';
 import { cwd } from 'process';
-import { checkForUncommited, getRandomPhrase } from './helper';
-import { startManageBuildAsync } from '../cli/manage-build';
+import { checkForUncommited, getRandomPhrase } from './helper.js';
+import { startManageBuildAsync } from '../cli/manage-build.js';
 
 const { cyan, greenBright, gray, underline, yellow, bold } = chalk;
 
