@@ -14,6 +14,7 @@ This package delivers a CLI command `manage-build` which handles the whole build
 - [Installation](#installation)
 - [Use](#use)
 	- [Getting started](#getting-started)
+	- [Flags](#flags)
 	- [Configuration](#configuration)
 	- [Steps](#steps)
 	- [Versioning](#versioning)
@@ -35,11 +36,22 @@ yarn add react-native-build-manager
 ## Getting started
 The process of using the command is pretty straightforward.
 ```powershell
-npx manage-build
+npx manage-build --[flag(s)]
 ```
 On the first run, a configuration file will be created in `./build-manager`. It currently only stores whether you are using it in an (ejected) expo project or not. This is used to update the `app.json` -in the case of an expo project- to ensure consistency.
 
 > **Output:** The APK will be found in `./android/app/build/outputs/apk/release`
+
+<br/>
+
+## Flags
+
+| Flag         | Alias | Description                                          | Default |
+| :----------- | :---: | :--------------------------------------------------- | :-----: |
+| help         |  `-`  | Show the command's help                              |   `-`   |
+| version      | `-v`  | Show the package's version                           |   `-`   |
+| output       | `-o`  | Predefines what kind of build type you are going for |   `-`   |
+| same-version |  `-`  | Predefines if the version will stay the same         | `false` |
 
 <br/>
 
