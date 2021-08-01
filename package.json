@@ -17,7 +17,7 @@
 		"build": "tsc --build",
 		"clean": "tsc --build --clean",
 		"start": "tsc --build && node ./out/cli/manage-build.js",
-		"release": "yarn run build && dotenv release-it -- --only-version",
+		"release": "yarn run build && dotenv release-it -- --ci",
 		"changelog": "auto-changelog --handlebars-setup ./changelog-config/setup.cjs && auto-changelog --handlebars-setup ./changelog-config/setup.cjs -o ./doc/RELEASE_NOTES.md -t ./changelog-config/release-notes.hbs"
 	},
 	"devDependencies": {
@@ -57,8 +57,7 @@
 		},
 		"plugins": {
 			"@release-it/conventional-changelog": {
-				"preset": "angular",
-				"ignoreRecommendedBump": true
+				"preset": "angular"
 			}
 		}
 	},
