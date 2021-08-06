@@ -31,5 +31,5 @@ export const updateVersions = (newVerName: string, newVerCode: string, expo: boo
 
 	packageJson.version = newVerName;
 
-	writeFileSync(APP_JSON_PATH, JSON.stringify(packageJson, null, '\t'));
+	writeFileSync(PACKAGE_JSON_PATH, JSON.stringify(packageJson, null, '\t'));
 };
