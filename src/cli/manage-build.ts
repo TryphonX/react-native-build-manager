@@ -85,8 +85,6 @@ export const startManageBuildAsync = async(): Promise<void> => {
 
 	const args = await parser.argv;
 
-	console.log(args['same-version']);
-
 	const config = getConfig();
 
 	const appJsonVer = config.expo ? getAppJSonVersion() : '';
