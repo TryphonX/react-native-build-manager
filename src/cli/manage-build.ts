@@ -27,11 +27,22 @@ const parser = yargs(getArgvNoBin()).options({
 		desc: 'Do not increment the version',
 		default: false,
 	},
+	verbose: {
+		type: 'boolean',
+		desc: 'Returns more information on errors etc',
+		default: false,
+	},
 });
 
 const { red, cyan, yellow } = chalk;
 
-process.on('uncaughtException', () => {
+process.on('uncaughtException', async(err) => {
+
+	const args = await parser.argv;
+	
+	if (args?.verbose) {
+		console.error(err);
+	}
 
 	console.log(`${red.bold('!')} Aborted!\n`);
 	process.exit();
