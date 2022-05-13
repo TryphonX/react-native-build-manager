@@ -2,6 +2,7 @@ import chalk from 'chalk';
 import { exec } from 'child_process';
 import { BuildTask, giveChoice, logReply, makeYesNoQuestion, START_PHRASES } from './common.js';
 import { error, warn } from './consolePlus.js';
+import os from 'os';
 
 const { greenBright, red } = chalk;
 
@@ -14,6 +15,16 @@ enum versionIncrement {
 	Patch = 'Patch',
 	None = 'None',
 }
+
+enum osType {
+	Windows = 'Windows_NT',
+	Linux = 'Linux',
+	MacOS = 'Darwin',
+}
+
+const currentOS = os.type();
+
+const getIsLinux = () => currentOS === osType.Linux;
 
 /**
  * Gets the random phrase
@@ -103,19 +114,19 @@ export const buildApk = (task: BuildTask): void => {
 
 	switch (task) {
 	case BuildTask.Debug:
-		buildCmd = 'cd ./android/ && gradlew assembleDebug';
+		buildCmd = `${getIsLinux() ? './' : ''}gradlew assembleDebug`;
 		break;
 	
 	case BuildTask.ReleaseApk:
-		buildCmd = 'cd ./android/ && gradlew assembleRelease';
+		buildCmd = `${getIsLinux() ? './' : ''}gradlew assembleRelease`;
 		break;
 
 	case BuildTask.ReleaseBundle:
-		buildCmd = 'cd ./android/ && gradlew bundleRelease';
+		buildCmd = `${getIsLinux() ? './' : ''}gradlew bundleRelease`;
 		break;
 
 	case BuildTask.ReleaseFull:
-		buildCmd = 'cd ./android/ && gradlew assembleRelease && gradlew bundleRelease';
+		buildCmd = `${getIsLinux() ? './' : ''}gradlew assembleRelease && ${getIsLinux() ? './' : ''}gradlew bundleRelease`;
 		break;
 
 	default:
@@ -123,7 +134,7 @@ export const buildApk = (task: BuildTask): void => {
 		break;
 	}
 
-	const buildProcess = exec(`${bundleCmd} && ${buildCmd}`);
+	const buildProcess = exec(`${bundleCmd} && cd ./android/ && ${buildCmd}`);
 
 	let success = false;
 
