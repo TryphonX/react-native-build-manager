@@ -1,7 +1,7 @@
 {
 	"name": "react-native-build-manager",
 	"type": "module",
-	"version": "1.4.1",
+	"version": "1.4.2",
 	"description": "This package delivers a CLI command `manage-build` which handles the whole building process for you. More specifically, it takes care of versioning, bundling and building the APK or AAB.",
 	"main": "./out/cli.js",
 	"bin": {
